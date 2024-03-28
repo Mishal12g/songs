@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:songs/resources/app_colors.dart';
 import 'package:songs/ui/pages/onboarding_page/onboarding_page.dart';
 import 'package:songs/ui/pages/splash_page/splash_page.dart';
 import 'package:songs/ui/pages/tabbar_page/tabbar_page.dart';
@@ -16,6 +17,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.background,
+        appBarTheme: AppBarTheme(
+            color: AppColors.background,
+            titleTextStyle: GoogleFonts.manrope(
+                fontSize: 19,
+                fontWeight: FontWeight.w700,
+                color: Colors.white)),
         textTheme: TextTheme(
           titleLarge: GoogleFonts.manrope(
             color: Colors.white,

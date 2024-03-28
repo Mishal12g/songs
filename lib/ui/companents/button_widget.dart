@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:songs/resources/app_colors.dart';
 
 class ButtonWidget extends StatelessWidget {
+  final double? width;
+  final double? height;
   final Color? color;
   final Color colorText;
   final bool isHiddenBorder;
@@ -10,6 +12,8 @@ class ButtonWidget extends StatelessWidget {
   final double radius;
   final TextStyle? textStyle;
   final Function onTap;
+  final Color borderColor;
+  final Widget? rightWidget;
 
   const ButtonWidget({
     super.key,
@@ -20,14 +24,19 @@ class ButtonWidget extends StatelessWidget {
     this.color,
     this.radius = 0,
     this.textStyle,
+    this.borderColor = AppColors.yellow,
+    this.width,
+    this.height,
+    this.rightWidget,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        child: Container(
+    return Stack(
+      children: [
+        Container(
+          width: width,
+          height: height,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(radius),
@@ -35,23 +44,41 @@ class ButtonWidget extends StatelessWidget {
                 ? null
                 : Border.all(
                     width: 1,
-                    color: colorText,
+                    color: borderColor,
                   ),
           ),
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 12,
           ),
-          child: Text(text,
-              style: textStyle ??
-                  GoogleFonts.manrope(
-                    color: AppColors.yellow,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14,
-                  )),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                text,
+                style: textStyle ??
+                    GoogleFonts.manrope(
+                      color: colorText,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
+              ),
+              rightWidget != null ? const SizedBox(width: 8) : const SizedBox(),
+              rightWidget ?? const SizedBox()
+            ],
+          ),
         ),
-        onTap: () => onTap(),
-      ),
+        Positioned.fill(
+          child: Material(
+            borderRadius: BorderRadius.circular(radius),
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(radius),
+              onTap: () => onTap(),
+            ),
+          ),
+        )
+      ],
     );
   }
 }

@@ -3,6 +3,8 @@ part of 'resources.dart';
 class AppImages {
   AppImages._();
 
+  static const String background = 'images/background.png';
+  static const String guitar = 'images/guitar.png';
   static const String nota = 'images/nota.png';
   static const String splash1 = 'images/splash1.png';
   static const String splash2 = 'images/splash2.png';

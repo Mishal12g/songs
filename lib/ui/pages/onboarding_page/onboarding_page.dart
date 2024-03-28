@@ -57,7 +57,7 @@ class OnboardingPage extends StatelessWidget {
                       ButtonWidget(
                         text: "Пропустить",
                         onTap: () {
-                          Get.toNamed("/tabbarPage");
+                          Get.offAndToNamed("/tabbarPage");
                         },
                       ),
                       const Spacer(),

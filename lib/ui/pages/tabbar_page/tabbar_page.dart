@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
+import 'package:songs/ui/pages/guitars_page/guitars_page.dart';
 
 class TabbarPage extends StatefulWidget {
   const TabbarPage({super.key});
@@ -87,7 +88,7 @@ class _TabbarPageState extends State<TabbarPage> {
         ],
       ),
       body: const [
-        Center(child: Text("Collection Guitars")),
+        GuitarsPage(),
         Center(child: Text("Guitar Accessories")),
         Center(child: Text("Songs")),
         Center(child: Text("Sound recordings")),

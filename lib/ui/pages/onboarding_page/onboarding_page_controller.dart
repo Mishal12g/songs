@@ -1,5 +1,4 @@
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:songs/resources/resources.dart';
 
 class OnboardingPageController extends GetxController {
@@ -28,7 +27,7 @@ class OnboardingPageController extends GetxController {
       _currentIndex = index;
       update();
     } else {
-      Get.toNamed("/tabbarPage");
+      Get.offAndToNamed("/tabbarPage");
     }
   }
 }
