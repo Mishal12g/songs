@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:songs/resources/app_colors.dart';
@@ -37,6 +38,15 @@ class OnboardingPage extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodyMedium,
                         textAlign: TextAlign.center,
                       ),
+                      const SizedBox(height: 16),
+                      PageViewIndicator(
+                        length: c.texts.length,
+                        currentIndex: c.currentIndex,
+                        otherSize: 8,
+                        currentSize: 8,
+                        currentColor: AppColors.yellow,
+                        otherColor: const Color.fromRGBO(255, 255, 255, 0.16),
+                      ),
                       const SizedBox(height: 24),
                     ],
                   ),
@@ -57,7 +67,7 @@ class OnboardingPage extends StatelessWidget {
                         },
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
