@@ -3,6 +3,7 @@ import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:songs/ui/pages/onboarding_page/onboarding_page.dart';
 import 'package:songs/ui/pages/splash_page/splash_page.dart';
+import 'package:songs/ui/pages/tabbar_page/tabbar_page.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const SplashPage(),
         "/onboardingPage": (context) => const OnboardingPage(),
+        "/tabbarPage": (context) => const TabbarPage(),
       },
     );
   }

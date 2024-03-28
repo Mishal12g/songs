@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
+import 'package:get/route_manager.dart';
 import 'package:songs/resources/app_colors.dart';
 import 'package:songs/ui/companents/button_widget.dart';
 import 'package:songs/ui/pages/onboarding_page/onboarding_page_controller.dart';
@@ -55,7 +56,9 @@ class OnboardingPage extends StatelessWidget {
                     children: [
                       ButtonWidget(
                         text: "Пропустить",
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed("/tabbarPage");
+                        },
                       ),
                       const Spacer(),
                       ButtonWidget(
