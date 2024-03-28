@@ -92,7 +92,7 @@ class _PageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image(
       width: double.infinity,
-      fit: BoxFit.contain,
+      fit: BoxFit.fitWidth,
       image: AssetImage(image),
     );
   }

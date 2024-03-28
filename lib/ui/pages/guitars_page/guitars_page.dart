@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
@@ -51,7 +52,7 @@ class _EmptyStateWidget extends StatelessWidget {
           fit: BoxFit.fitWidth,
         ),
         Positioned.fill(
-          child: ListView(
+          child: Column(
             children: [
               const SizedBox(height: 12),
               Text(
@@ -63,8 +64,11 @@ class _EmptyStateWidget extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              Image.asset(
-                AppImages.guitar,
+              Expanded(
+                child: Image.asset(
+                  AppImages.guitar,
+                  fit: BoxFit.fitWidth,
+                ),
               ),
               const SizedBox(height: 71)
             ],
