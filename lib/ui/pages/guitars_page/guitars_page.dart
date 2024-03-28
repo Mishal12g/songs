@@ -15,31 +15,7 @@ class GuitarsPage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Image.asset(
-            AppImages.background,
-            width: double.infinity,
-            fit: BoxFit.fitWidth,
-          ),
-          Positioned.fill(
-            child: ListView(
-              children: [
-                const SizedBox(height: 12),
-                Text(
-                  "Коллекция гитар пока пуста",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.manrope(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                  ),
-                ),
-                Image.asset(
-                  AppImages.guitar,
-                ),
-                const SizedBox(height: 71)
-              ],
-            ),
-          ),
+          const _EmptyStateWidget(),
           Positioned(
             bottom: 12,
             right: 17,
@@ -58,6 +34,43 @@ class GuitarsPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _EmptyStateWidget extends StatelessWidget {
+  const _EmptyStateWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Image.asset(
+          AppImages.background,
+          width: double.infinity,
+          fit: BoxFit.fitWidth,
+        ),
+        Positioned.fill(
+          child: ListView(
+            children: [
+              const SizedBox(height: 12),
+              Text(
+                "Коллекция гитар пока пуста",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.manrope(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              ),
+              Image.asset(
+                AppImages.guitar,
+              ),
+              const SizedBox(height: 71)
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
