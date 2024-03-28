@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
 
@@ -16,63 +17,74 @@ class _TabbarPageState extends State<TabbarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: AppColors.background,
-        ),
-        child: BottomNavigationBar(
-          unselectedItemColor: Colors.red,
-          backgroundColor: AppColors.background,
-          currentIndex: currentIndex,
-          showUnselectedLabels: false,
-          showSelectedLabels: false,
-          selectedItemColor: Colors.red,
-          items: [
-            BottomNavigationBarItem(
-              label: "",
-              icon: Image.asset(
-                AppImages.tab1,
-                color: currentIndex == 0 ? AppColors.blue : null,
-              ),
+      bottomNavigationBar: Stack(
+        children: [
+          Theme(
+            data: Theme.of(context).copyWith(
+              canvasColor: AppColors.background,
             ),
-            BottomNavigationBarItem(
-              label: "",
-              icon: Image.asset(
-                AppImages.tab2,
-                color: currentIndex == 1 ? AppColors.blue : null,
-              ),
+            child: BottomNavigationBar(
+              unselectedItemColor: Colors.red,
+              backgroundColor: AppColors.background,
+              currentIndex: currentIndex,
+              showUnselectedLabels: false,
+              showSelectedLabels: false,
+              selectedItemColor: Colors.red,
+              items: [
+                BottomNavigationBarItem(
+                  label: "",
+                  icon: Image.asset(
+                    AppImages.tab1,
+                    color: currentIndex == 0 ? AppColors.blue : null,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "",
+                  icon: Image.asset(
+                    AppImages.tab2,
+                    color: currentIndex == 1 ? AppColors.blue : null,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "",
+                  icon: Image.asset(
+                    AppImages.tab3,
+                    color: currentIndex == 2 ? AppColors.blue : null,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "",
+                  icon: Image.asset(
+                    AppImages.tab4,
+                    color: currentIndex == 3 ? AppColors.blue : null,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "",
+                  icon: Image.asset(
+                    AppImages.tab5,
+                    color: currentIndex == 4 ? AppColors.blue : null,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "",
+                  icon: Image.asset(
+                    AppImages.tab6,
+                    color: currentIndex == 5 ? AppColors.blue : null,
+                  ),
+                ),
+              ],
+              onTap: (int value) => _setIndex(value),
             ),
-            BottomNavigationBarItem(
-              label: "",
-              icon: Image.asset(
-                AppImages.tab3,
-                color: currentIndex == 2 ? AppColors.blue : null,
-              ),
+          ),
+          Positioned(
+            child: Container(
+              width: double.infinity,
+              height: 0.5,
+              color: const Color.fromRGBO(131, 131, 131, 1),
             ),
-            BottomNavigationBarItem(
-              label: "",
-              icon: Image.asset(
-                AppImages.tab4,
-                color: currentIndex == 3 ? AppColors.blue : null,
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "",
-              icon: Image.asset(
-                AppImages.tab5,
-                color: currentIndex == 4 ? AppColors.blue : null,
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "",
-              icon: Image.asset(
-                AppImages.tab6,
-                color: currentIndex == 5 ? AppColors.blue : null,
-              ),
-            ),
-          ],
-          onTap: (int value) => _setIndex(value),
-        ),
+          ),
+        ],
       ),
       body: const [
         Center(child: Text("Collection Guitars")),
