@@ -3,6 +3,8 @@ part of 'resources.dart';
 class AppImages {
   AppImages._();
 
+  static const String arrowDiagonalBottom = 'images/ArrowDiagonalBottom.png';
+  static const String arrowDiagonalTop = 'images/ArrowDiagonalTop.png';
   static const String background = 'images/background.png';
   static const String guitar = 'images/guitar.png';
   static const String nota = 'images/nota.png';
@@ -15,4 +17,6 @@ class AppImages {
   static const String tab4 = 'images/tab4.png';
   static const String tab5 = 'images/tab5.png';
   static const String tab6 = 'images/tab6.png';
+  static const String trash = 'images/trash.png';
+  static const String union = 'images/union.png';
 }

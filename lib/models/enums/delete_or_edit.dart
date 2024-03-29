@@ -1,0 +1,4 @@
+enum DeleteOrEdit {
+  edit,
+  delete,
+}

@@ -1,23 +1,57 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
 import 'package:songs/ui/companents/button_widget.dart';
+import 'package:songs/ui/companents/show_alert.dart';
+import 'package:songs/ui/companents/title_collection_widget.dart';
+import 'package:songs/ui/pages/guitars_page/guitars_page_controller.dart';
 
 class GuitarsPage extends StatelessWidget {
   const GuitarsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    GuitarsPageController c = Get.put(GuitarsPageController());
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Гитары"),
       ),
       body: Stack(
         children: [
-          const _EmptyStateWidget(),
+          c.guitars.isEmpty
+              ? const _EmptyStateWidget()
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ListView(
+                    children: [
+                      TileCollectionWidget(
+                        typeGuitar: "Электроакустическая гитара",
+                        markGuitar: "Crafter",
+                        modelGuitar: "ML G-1000CE",
+                        comment:
+                            "Корпус Гранд Аудиториум разработан американской компанией Taylor в 1994. Форма гитары сочетает в себе изящный профиль Аудиториума с большим объёмом Дредноута, с целью стать идеальной универсальной акустической гитарой. Абсолютно универсальная гитара, на которой можно играть как перебором (фингерстайлом), так и медиатором.",
+                        deleteOnTap: () async {
+                          await showAlert(
+                            context,
+                            () {
+                              print("delete");
+                              Get.back();
+                            },
+                            title: 'Удалить?',
+                            content: 'Вы точно хотите удалить гитару?',
+                          );
+                        },
+                        editOnTap: () {
+                          print("edit");
+                        },
+                      ),
+                      const SizedBox(height: 70)
+                    ],
+                  ),
+                ),
           Positioned(
             bottom: 12,
             right: 17,
