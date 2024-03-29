@@ -6,20 +6,23 @@ import 'package:songs/resources/resources.dart';
 class PopUpDeleteOrEditWidget extends StatelessWidget {
   final Function edit;
   final Function delete;
+  final Image? image;
 
   const PopUpDeleteOrEditWidget({
     super.key,
     required this.edit,
     required this.delete,
+    this.image,
   });
 
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<DeleteOrEdit>(
-      icon: const Icon(
-        Icons.more_vert,
-        color: Color.fromRGBO(131, 131, 131, 1),
-      ),
+      icon: image ??
+          const Icon(
+            Icons.more_vert,
+            color: Color.fromRGBO(131, 131, 131, 1),
+          ),
       color: const Color.fromRGBO(7, 42, 57, 1),
       onSelected: (DeleteOrEdit item) {
         switch (item) {

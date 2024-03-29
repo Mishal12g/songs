@@ -6,6 +6,7 @@ class AppImages {
   static const String arrowDiagonalBottom = 'images/ArrowDiagonalBottom.png';
   static const String arrowDiagonalTop = 'images/ArrowDiagonalTop.png';
   static const String background = 'images/background.png';
+  static const String delete = 'images/delete.png';
   static const String guitar = 'images/guitar.png';
   static const String nota = 'images/nota.png';
   static const String splash1 = 'images/splash1.png';

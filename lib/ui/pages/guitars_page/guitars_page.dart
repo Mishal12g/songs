@@ -45,7 +45,7 @@ class GuitarsPage extends StatelessWidget {
                           );
                         },
                         editOnTap: () {
-                          print("edit");
+                          Get.toNamed("/GuitarEditFormPage");
                         },
                       ),
                       const SizedBox(height: 70)
