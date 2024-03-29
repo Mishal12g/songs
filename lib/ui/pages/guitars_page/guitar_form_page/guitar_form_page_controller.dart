@@ -6,4 +6,11 @@ class GuitarFormPageController extends GetxController {
   final TextEditingController markController = TextEditingController();
   final TextEditingController modelGuitarController = TextEditingController();
   final TextEditingController commentController = TextEditingController();
+
+  clearTextFields() {
+    typeGuitarController.text = "";
+    markController.text = "";
+    modelGuitarController.text = "";
+    commentController.text = "";
+  }
 }

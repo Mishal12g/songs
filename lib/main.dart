@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:songs/resources/app_colors.dart';
+import 'package:songs/ui/pages/guitar_accessories_page/guitar_accessories_form_page/guitar_accessories_edit_form_page.dart';
+import 'package:songs/ui/pages/guitar_accessories_page/guitar_accessories_form_page/guitar_accessories_form_page.dart';
 import 'package:songs/ui/pages/guitars_page/guitar_form_page/guitar_edit_form_page.dart';
 import 'package:songs/ui/pages/guitars_page/guitar_form_page/guitar_form_page.dart';
 import 'package:songs/ui/pages/onboarding_page/onboarding_page.dart';
@@ -48,6 +50,10 @@ class MyApp extends StatelessWidget {
         "/tabbarPage": (context) => const TabbarPage(),
         "/GuitarFormPage": (context) => const GuitarFormPage(),
         "/GuitarEditFormPage": (context) => const GuitarEditFormPage(),
+        "/GuitarAccessoriesFormPage": (context) =>
+            const GuitarAccessoriesFormPage(),
+        "/GuitarEditAccessoriesFormPage": (context) =>
+            const GuitarEditAccessoriesFormPage(),
       },
     );
   }

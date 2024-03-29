@@ -6,44 +6,47 @@ import 'package:songs/resources/resources.dart';
 import 'package:songs/ui/companents/button_widget.dart';
 import 'package:songs/ui/companents/show_alert.dart';
 import 'package:songs/ui/companents/title_collection_widget.dart';
-import 'package:songs/ui/pages/guitars_page/guitars_page_controller.dart';
+import 'package:songs/ui/pages/guitar_accessories_page/guitar_accessories_form_page/guitar_accessories_form_page_controller.dart';
+import 'package:songs/ui/pages/guitar_accessories_page/guitar_accessories_page_controller.dart';
 
-class GuitarsPage extends StatelessWidget {
-  const GuitarsPage({super.key});
+class GuitarAccessoriesPage extends StatelessWidget {
+  const GuitarAccessoriesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    GuitarsPageController c = Get.put(GuitarsPageController());
+    Get.put(GuitarAccessoriesFormPageController());
+    GuitarsAccessoriesPageController c =
+        Get.put(GuitarsAccessoriesPageController());
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Гитары"),
+        title: const Text("Аксессуары для гитар"),
       ),
-      body: GetBuilder<GuitarsPageController>(
+      body: GetBuilder<GuitarsAccessoriesPageController>(
         builder: (controller) => Stack(
           children: [
-            c.guitars.isEmpty
+            c.accessories.isEmpty
                 ? const _EmptyStateWidget()
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: ListView.builder(
-                      itemCount: c.guitars.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final guitar = c.guitars[index];
+                      itemCount: c.accessories.length,
+                      itemBuilder: (context, index) {
+                        final accessory = c.accessories[index];
 
                         return Column(
                           children: [
                             TileCollectionWidget(
-                              typeGuitar: guitar.typeGuitar,
-                              markGuitar: guitar.markGuitar,
-                              modelGuitar: guitar.modelGuitar,
-                              comment: guitar.comment.isNotEmpty
-                                  ? guitar.comment
-                                  : "Комментарий нет",
+                              typeGuitar: accessory.description,
+                              markGuitar: accessory.name,
+                              comment: accessory.comment.isEmpty
+                                  ? "Комментарий нет"
+                                  : accessory.comment,
                               deleteOnTap: () async {
                                 await showAlert(
                                   context,
                                   () {
+                                    print("delete");
                                     Get.back();
                                   },
                                   title: 'Удалить?',
@@ -51,13 +54,14 @@ class GuitarsPage extends StatelessWidget {
                                 );
                               },
                               editOnTap: () {
-                                Get.toNamed("/GuitarEditFormPage",
-                                    arguments: guitar);
+                                Get.toNamed("/GuitarEditAccessoriesFormPage",
+                                    arguments: accessory);
                               },
+                              modelGuitar: '',
                             ),
-                            index == c.guitars.last
+                            index == c.accessories.length - 1
                                 ? const SizedBox(height: 70)
-                                : const SizedBox(),
+                                : const SizedBox()
                           ],
                         );
                       },
@@ -73,10 +77,10 @@ class GuitarsPage extends StatelessWidget {
                   color: AppColors.yellow,
                   radius: 24,
                   colorText: Colors.black,
-                  text: "Добавить гитару",
+                  text: "Добавить аксессуар",
                   rightWidget: const Icon(Icons.add),
                   onTap: () {
-                    Get.toNamed("/GuitarFormPage");
+                    Get.toNamed("/GuitarAccessoriesFormPage");
                   },
                 ),
               ),
@@ -96,7 +100,7 @@ class _EmptyStateWidget extends StatelessWidget {
     return Stack(
       children: [
         Image.asset(
-          AppImages.background,
+          AppImages.backgroundTwo,
           width: double.infinity,
           fit: BoxFit.fitWidth,
         ),
@@ -105,7 +109,7 @@ class _EmptyStateWidget extends StatelessWidget {
             children: [
               const SizedBox(height: 12),
               Text(
-                "Коллекция гитар пока пуста",
+                "Пока нет добавленных аксессуаров",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.manrope(
                   fontSize: 15,
@@ -115,8 +119,9 @@ class _EmptyStateWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Image.asset(
-                  AppImages.guitar,
-                  fit: BoxFit.fitWidth,
+                  AppImages.guitarAccessorie,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
               ),
               const SizedBox(height: 71)
