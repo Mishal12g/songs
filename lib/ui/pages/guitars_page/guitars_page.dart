@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
@@ -29,7 +30,9 @@ class GuitarsPage extends StatelessWidget {
                 colorText: Colors.black,
                 text: "Добавить гитару",
                 rightWidget: const Icon(Icons.add),
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/GuitarFormPage");
+                },
               ),
             ),
           ),
