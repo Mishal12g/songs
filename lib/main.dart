@@ -10,6 +10,7 @@ import 'package:songs/ui/pages/onboarding_page/onboarding_page.dart';
 import 'package:songs/ui/pages/splash_page/splash_page.dart';
 import 'package:songs/ui/pages/tabbar_page/tabbar_page.dart';
 import 'package:songs/ui/pages/useful/game_lessons_page.dart';
+import 'package:songs/ui/pages/useful/guitar_care_page.dart';
 import 'package:songs/ui/pages/useful/library_chords_page/library_chords_page.dart';
 import 'package:songs/ui/pages/useful/setting_guitar_page.dart';
 
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
         "/LubraryChordsPage": (context) => const LubraryChordsPage(),
         "/SettingGuitarPage": (context) => const SettingGuitarPage(),
         "/GameLessonsPage": (context) => const GameLessonsPage(),
+        "/GuitarCarePage": (context) => const GuitarCarePage(),
       },
     );
   }

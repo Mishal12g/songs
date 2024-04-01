@@ -46,7 +46,9 @@ class UsefulPage extends StatelessWidget {
                 width: width,
                 color: const Color.fromRGBO(47, 173, 150, 1),
                 title: 'Уход за гитарой',
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/GuitarCarePage");
+                },
               ),
               const SizedBox(width: 7),
               _ButtonWidget(
