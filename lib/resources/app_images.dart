@@ -3,8 +3,11 @@ part of 'resources.dart';
 class AppImages {
   AppImages._();
 
+  static const String agreement = 'images/Agreement.png';
   static const String arrowDiagonalBottom = 'images/ArrowDiagonalBottom.png';
   static const String arrowDiagonalTop = 'images/ArrowDiagonalTop.png';
+  static const String confendiality = 'images/Confendiality.png';
+  static const String star = 'images/Star.png';
   static const String background = 'images/background.png';
   static const String backgroundTwo = 'images/backgroundTwo.png';
   static const String c1 = 'images/c1.png';
