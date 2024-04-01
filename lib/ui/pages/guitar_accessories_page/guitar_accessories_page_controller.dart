@@ -2,15 +2,15 @@ import 'package:get/get.dart';
 import 'package:songs/models/accessories.dart';
 
 class GuitarsAccessoriesPageController extends GetxController {
-  List<Accessories> _accessories = [];
-  List<Accessories> get accessories => _accessories;
+  List<Accessory> _accessories = [];
+  List<Accessory> get accessories => _accessories;
 
-  addAccessories(Accessories accessory) {
+  addAccessories(Accessory accessory) {
     _accessories.add(accessory);
     update();
   }
 
-  editAccessory(Accessories accessory) {
+  editAccessory(Accessory accessory) {
     _accessories.add(accessory);
     update();
   }

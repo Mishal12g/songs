@@ -7,6 +7,7 @@ class FormTextFieldWidget extends StatelessWidget {
   final String hintText;
   final TextEditingController? controller;
   final double height;
+  final double? maxHeight;
   final int? maxLines;
 
   const FormTextFieldWidget({
@@ -16,6 +17,7 @@ class FormTextFieldWidget extends StatelessWidget {
     this.controller,
     this.height = 44,
     this.maxLines = 1,
+    this.maxHeight,
   });
 
   @override
@@ -33,7 +35,8 @@ class FormTextFieldWidget extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Container(
-          height: height,
+          constraints: BoxConstraints(maxHeight: maxHeight ?? height),
+          height: maxHeight == null ? height : null,
           decoration: BoxDecoration(
             color: AppColors.action,
             borderRadius: BorderRadius.circular(12),

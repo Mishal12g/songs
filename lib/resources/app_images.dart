@@ -9,6 +9,7 @@ class AppImages {
   static const String confendiality = 'images/Confendiality.png';
   static const String star = 'images/Star.png';
   static const String background = 'images/background.png';
+  static const String backgroundSongs = 'images/backgroundSongs.png';
   static const String backgroundTwo = 'images/backgroundTwo.png';
   static const String c1 = 'images/c1.png';
   static const String c2 = 'images/c2.png';
@@ -94,6 +95,8 @@ class AppImages {
   static const String lesson2 = 'images/lesson2.png';
   static const String lesson3 = 'images/lesson3.png';
   static const String nota = 'images/nota.png';
+  static const String nota1 = 'images/nota1.png';
+  static const String notaIcon = 'images/notaIcon.png';
   static const String settingGuitar1 = 'images/settingGuitar1.png';
   static const String settingGuitar2 = 'images/settingGuitar2.png';
   static const String splash1 = 'images/splash1.png';

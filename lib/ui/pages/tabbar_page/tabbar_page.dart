@@ -5,6 +5,7 @@ import 'package:songs/resources/resources.dart';
 import 'package:songs/ui/pages/guitar_accessories_page/guitar_accessories_page.dart';
 import 'package:songs/ui/pages/guitars_page/guitars_page.dart';
 import 'package:songs/ui/pages/settings_page/settings_page.dart';
+import 'package:songs/ui/pages/songs_page/songs_page.dart';
 import 'package:songs/ui/pages/useful/useful_page.dart';
 
 class TabbarPage extends StatefulWidget {
@@ -93,7 +94,7 @@ class _TabbarPageState extends State<TabbarPage> {
       body: const [
         GuitarsPage(),
         GuitarAccessoriesPage(),
-        Center(child: Text("Songs")),
+        SongsPage(),
         Center(child: Text("Sound recordings")),
         UsefulPage(),
         SettingsPage(),

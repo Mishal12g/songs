@@ -16,7 +16,7 @@ class GuitarEditAccessoriesFormPage extends StatelessWidget {
     GuitarAccessoriesFormPageController c =
         Get.put(GuitarAccessoriesFormPageController());
 
-    final accessory = Get.arguments as Accessories;
+    final accessory = Get.arguments as Accessory;
     c.nameController.text = accessory.name;
     c.descriprionController.text = accessory.description;
     c.commentController.text = accessory.comment;
@@ -78,7 +78,7 @@ class GuitarEditAccessoriesFormPage extends StatelessWidget {
               onTapTwo: () {
                 if (c.nameController.text.isNotEmpty &&
                     c.descriprionController.text.isNotEmpty) {
-                  final accessories = Accessories(
+                  final accessories = Accessory(
                     name: c.nameController.text,
                     description: c.descriprionController.text,
                     comment: c.commentController.text,

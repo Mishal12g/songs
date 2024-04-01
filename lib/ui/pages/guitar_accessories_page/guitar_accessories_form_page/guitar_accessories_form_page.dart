@@ -53,7 +53,7 @@ class GuitarAccessoriesFormPage extends StatelessWidget {
               onTapTwo: () {
                 if (c.nameController.text.isNotEmpty &&
                     c.descriprionController.text.isNotEmpty) {
-                  final accessories = Accessories(
+                  final accessories = Accessory(
                     name: c.nameController.text,
                     description: c.descriprionController.text,
                     comment: c.commentController.text,
