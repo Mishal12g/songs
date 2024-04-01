@@ -50,7 +50,7 @@ class TextWidget extends StatelessWidget {
             ? Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Text(
-                  title ?? "",
+                  accentTitle ?? "",
                   style: GoogleFonts.manrope(
                     fontWeight: FontWeight.w400,
                     fontSize: 16,

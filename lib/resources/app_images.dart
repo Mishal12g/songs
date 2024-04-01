@@ -15,6 +15,10 @@ class AppImages {
   static const String c6 = 'images/c6.png';
   static const String c7 = 'images/c7.png';
   static const String c8 = 'images/c8.png';
+  static const String care1 = 'images/care1.png';
+  static const String care2 = 'images/care2.png';
+  static const String care3 = 'images/care3.png';
+  static const String care4 = 'images/care4.png';
   static const String cd1 = 'images/cd1.png';
   static const String cd2 = 'images/cd2.png';
   static const String cd3 = 'images/cd3.png';
@@ -83,6 +87,9 @@ class AppImages {
   static const String gd8 = 'images/gd8.png';
   static const String guitar = 'images/guitar.png';
   static const String guitarAccessorie = 'images/guitarAccessorie.png';
+  static const String lesson1 = 'images/lesson1.png';
+  static const String lesson2 = 'images/lesson2.png';
+  static const String lesson3 = 'images/lesson3.png';
   static const String nota = 'images/nota.png';
   static const String settingGuitar1 = 'images/settingGuitar1.png';
   static const String settingGuitar2 = 'images/settingGuitar2.png';

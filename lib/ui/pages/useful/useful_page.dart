@@ -53,7 +53,9 @@ class UsefulPage extends StatelessWidget {
                 width: width,
                 color: const Color.fromRGBO(226, 147, 152, 1),
                 title: 'Уроки игры на гитаре',
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/GameLessonsPage");
+                },
               ),
             ],
           ),
