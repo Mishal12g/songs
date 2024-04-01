@@ -9,6 +9,7 @@ import 'package:songs/ui/pages/guitars_page/guitar_form_page/guitar_form_page.da
 import 'package:songs/ui/pages/onboarding_page/onboarding_page.dart';
 import 'package:songs/ui/pages/splash_page/splash_page.dart';
 import 'package:songs/ui/pages/tabbar_page/tabbar_page.dart';
+import 'package:songs/ui/pages/useful/library_chords_page/library_chords_page.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
             const GuitarAccessoriesFormPage(),
         "/GuitarEditAccessoriesFormPage": (context) =>
             const GuitarEditAccessoriesFormPage(),
+        "/LubraryChordsPage": (context) => const LubraryChordsPage(),
       },
     );
   }
