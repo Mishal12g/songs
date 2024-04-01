@@ -2,14 +2,7 @@ import 'package:get/get.dart';
 import 'package:songs/models/song.dart';
 
 class SongsPageController extends GetxController {
-  List<Song> _songs = [
-    Song(
-      name: "Крылья",
-      executor: "Наутилус Помпилиус",
-      text: text,
-      comment: "comment",
-    ),
-  ];
+  final List<Song> _songs = [];
 
   List<Song> get songs => _songs;
 

@@ -57,6 +57,7 @@ class AppImages {
   static const String e6 = 'images/e6.png';
   static const String e7 = 'images/e7.png';
   static const String e8 = 'images/e8.png';
+  static const String editTwo = 'images/editTwo.png';
   static const String f1 = 'images/f1.png';
   static const String f2 = 'images/f2.png';
   static const String f3 = 'images/f3.png';
@@ -109,5 +110,6 @@ class AppImages {
   static const String tab5 = 'images/tab5.png';
   static const String tab6 = 'images/tab6.png';
   static const String trash = 'images/trash.png';
+  static const String trashTwo = 'images/trashTwo.png';
   static const String union = 'images/union.png';
 }

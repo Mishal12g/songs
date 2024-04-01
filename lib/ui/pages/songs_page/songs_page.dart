@@ -23,27 +23,27 @@ class SongsPage extends StatelessWidget {
           children: [
             c.songs.isEmpty
                 ? const _EmptyStateWidget()
-                : Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: ListView.builder(
-                        itemCount: c.songs.length,
-                        itemBuilder: (context, index) {
-                          final song = c.songs[index];
-                          return Column(
-                            children: [
-                              _SongTileWidget(
-                                name: song.name,
-                                group: song.executor,
-                                delete: () {},
-                                edit: () {},
-                                onTap: () {},
-                              ),
-                              const Divider(thickness: 0.3),
-                            ],
-                          );
-                        },
-                      ),
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: ListView.builder(
+                      itemCount: c.songs.length,
+                      itemBuilder: (context, index) {
+                        final song = c.songs[index];
+                        return Column(
+                          children: [
+                            _SongTileWidget(
+                              name: song.name,
+                              group: song.executor,
+                              delete: () {},
+                              edit: () {},
+                              onTap: () {
+                                Get.toNamed("/SongPage", arguments: song);
+                              },
+                            ),
+                            const Divider(thickness: 0.3),
+                          ],
+                        );
+                      },
                     ),
                   ),
             Positioned(
