@@ -32,7 +32,9 @@ class UsefulPage extends StatelessWidget {
                 width: width,
                 color: const Color.fromRGBO(92, 156, 252, 1),
                 title: 'Настройка гитары',
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/SettingGuitarPage");
+                },
               ),
             ],
           ),

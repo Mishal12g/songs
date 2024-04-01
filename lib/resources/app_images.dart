@@ -84,6 +84,8 @@ class AppImages {
   static const String guitar = 'images/guitar.png';
   static const String guitarAccessorie = 'images/guitarAccessorie.png';
   static const String nota = 'images/nota.png';
+  static const String settingGuitar1 = 'images/settingGuitar1.png';
+  static const String settingGuitar2 = 'images/settingGuitar2.png';
   static const String splash1 = 'images/splash1.png';
   static const String splash2 = 'images/splash2.png';
   static const String splash3 = 'images/splash3.png';
