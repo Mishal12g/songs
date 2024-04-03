@@ -24,8 +24,9 @@ class RecordingPage extends StatelessWidget {
             const _BackgroundWidget(),
             const Spacer(),
             SafeArea(
-              child:
-                  !c.isPlay ? _StopStateWidget(c: c) : _PlayStateWidget(c: c),
+              child: !c.isRecording
+                  ? _StopStateWidget(c: c)
+                  : _PlayStateWidget(c: c),
             ),
             const SizedBox(height: 25),
           ],
@@ -100,7 +101,7 @@ class _StopStateWidget extends StatelessWidget {
         IconButton(
           color: AppColors.yellow,
           onPressed: () {
-            c.playRecording();
+            c.startRecording();
           },
           icon: Container(
               width: 64,

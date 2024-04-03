@@ -1,6 +1,9 @@
+import 'package:path/path.dart' as path;
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:songs/models/audio.dart';
 import 'package:songs/models/song.dart';
 import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
@@ -8,6 +11,7 @@ import 'package:songs/ui/companents/form_textfield_widget.dart';
 import 'package:songs/ui/companents/two_buttons_widget.dart';
 import 'package:songs/ui/pages/recordings_page/recording_form_page/recording_form_page_controller.dart';
 import 'package:songs/ui/pages/recordings_page/recording_page/recording_page_controller.dart';
+import 'package:songs/ui/pages/recordings_page/recordings_page_controller.dart';
 
 class RecordingFormPage extends StatelessWidget {
   const RecordingFormPage({super.key});
@@ -17,6 +21,8 @@ class RecordingFormPage extends StatelessWidget {
     final RecordingFormPageController c =
         Get.put(RecordingFormPageController());
 
+    final recordingC = Get.find<RecordingPageController>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Звукозапись"),
@@ -25,49 +31,85 @@ class RecordingFormPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Stack(
           children: [
-            ListView(
-              children: [
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Text("03:26"),
-                    const Spacer(),
-                    Image.asset(
-                      AppImages.soundRecordingTwo,
-                    ),
-                    const Spacer(),
-                    IconButton(
-                        onPressed: () {}, icon: Image.asset(AppImages.play))
-                  ],
-                ),
-                const SizedBox(height: 24),
-                Text(
-                  "Назовите звукозапись",
-                  style: GoogleFonts.manrope(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
+            GetBuilder<RecordingPageController>(
+              builder: (controller) => ListView(
+                children: [
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text("03:26"),
+                      const Spacer(),
+                      Image.asset(
+                        AppImages.soundRecordingTwo,
+                      ),
+                      const Spacer(),
+                      GetBuilder<RecordingFormPageController>(
+                        builder: (controller) => IconButton(
+                          onPressed: () {
+                            switch (recordingC.isPlay()) {
+                              case PlayerState.stopped:
+                                recordingC.playRecording();
+                              case PlayerState.playing:
+                                recordingC.pauseAudio();
+                              case PlayerState.paused:
+                                recordingC.resumeAudio();
+                              case PlayerState.completed:
+                                recordingC.playRecording();
+                              case PlayerState.disposed:
+                                recordingC.playRecording();
+                            }
+                          },
+                          icon: Image.asset(switch (recordingC.isPlay()) {
+                            PlayerState.stopped => AppImages.play,
+                            PlayerState.playing => AppImages.stopTwo,
+                            PlayerState.paused => AppImages.play,
+                            PlayerState.completed => AppImages.play,
+                            PlayerState.disposed => AppImages.play,
+                          }),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 12),
-                FormTextFieldWidget(
-                  title: "Название звукозаписи*",
-                  hintText: "Название",
-                  controller: c.nameController,
-                ),
-                const SizedBox(height: 12),
-                _SelectSongWidget(c: c),
-                const SizedBox(height: 24),
-                TwoButtonsWidget(
-                  onTapOne: () {
-                    Get.back();
-                  },
-                  onTapTwo: () {
-                    Get.back();
-                  },
-                ),
-              ],
+                  const SizedBox(height: 24),
+                  Text(
+                    "Назовите звукозапись",
+                    style: GoogleFonts.manrope(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  FormTextFieldWidget(
+                    title: "Название звукозаписи*",
+                    hintText: "Название",
+                    controller: c.nameController,
+                  ),
+                  const SizedBox(height: 12),
+                  _SelectSongWidget(c: c),
+                  const SizedBox(height: 24),
+                  TwoButtonsWidget(
+                    onTapOne: () {
+                      Get.back();
+                    },
+                    onTapTwo: () async {
+                      final recordingC = Get.find<RecordingPageController>();
+                      if (c.nameController.text.isNotEmpty &&
+                          recordingC.audioPath.isNotEmpty) {
+                        final audio = Audio(
+                            name: c.nameController.text,
+                            audioPath: path.basename(recordingC.audioPath),
+                            song: c.song);
+
+                        Get.find<RecordsPageController>().addAudio(audio);
+                        Get.back();
+                        Get.back();
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
             Positioned.fill(
               child: SafeArea(
@@ -84,7 +126,8 @@ class RecordingFormPage extends StatelessWidget {
                     IconButton(
                       color: AppColors.yellow,
                       onPressed: () {
-                        Get.find<RecordingPageController>().playRecording();
+                        Get.find<RecordingPageController>().startRecording();
+                        Get.find<RecordingPageController>().stopAudio();
                         Get.back();
                       },
                       icon: Container(

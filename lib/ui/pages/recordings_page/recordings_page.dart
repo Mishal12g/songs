@@ -1,6 +1,6 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
@@ -13,12 +13,12 @@ class RecordingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RecordingsPageController c = Get.put(RecordingsPageController());
+    final RecordsPageController c = Get.put(RecordsPageController());
     return Scaffold(
       appBar: AppBar(
         title: const Text("Звукозаписи"),
       ),
-      body: GetBuilder<RecordingsPageController>(
+      body: GetBuilder<RecordsPageController>(
         builder: (controller) => Stack(
           children: [
             c.audioList.isEmpty
@@ -28,7 +28,24 @@ class RecordingsPage extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: c.audioList.length,
                       itemBuilder: (context, index) {
-                        return const _AudioTileWidget();
+                        final record = c.audioList[index];
+                        return _AudioTileWidget(
+                          name: record.name,
+                          onTap: () async {
+                            switch (c.isPlay()) {
+                              case PlayerState.stopped:
+                                c.playRecording(index);
+                              case PlayerState.playing:
+                                c.pauseAudio();
+                              case PlayerState.paused:
+                                c.resumeAudio();
+                              case PlayerState.completed:
+                                c.playRecording(index);
+                              case PlayerState.disposed:
+                                c.playRecording(index);
+                            }
+                          },
+                        );
                       },
                     ),
                   ),
@@ -57,7 +74,9 @@ class RecordingsPage extends StatelessWidget {
 }
 
 class _AudioTileWidget extends StatefulWidget {
-  const _AudioTileWidget();
+  final String name;
+  final Function onTap;
+  const _AudioTileWidget({required this.name, required this.onTap});
 
   @override
   State<_AudioTileWidget> createState() => _AudioTileWidgetState();
@@ -68,6 +87,7 @@ class _AudioTileWidgetState extends State<_AudioTileWidget> {
 
   @override
   Widget build(BuildContext context) {
+    RecordsPageController c = Get.find<RecordsPageController>();
     return Stack(
       children: [
         Container(
@@ -83,7 +103,7 @@ class _AudioTileWidgetState extends State<_AudioTileWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Минус",
+                widget.name,
                 style: GoogleFonts.manrope(
                   fontWeight: FontWeight.w700,
                   fontSize: 14,
@@ -93,27 +113,21 @@ class _AudioTileWidgetState extends State<_AudioTileWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    "03:26",
-                    style: GoogleFonts.manrope(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: AppColors.yellow),
-                  ),
+                  const Text("03:26"),
                   const Spacer(),
                   Image.asset(
                     AppImages.soundRecordingTwo,
                   ),
                   const Spacer(),
                   IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isPlay = !isPlay;
-                      });
-                    },
-                    icon: Image.asset(
-                      !isPlay ? AppImages.play : AppImages.stopTwo,
-                    ),
+                    onPressed: () => widget.onTap(),
+                    icon: Image.asset(switch (c.isPlay()) {
+                      PlayerState.stopped => AppImages.play,
+                      PlayerState.playing => AppImages.stopTwo,
+                      PlayerState.paused => AppImages.play,
+                      PlayerState.completed => AppImages.play,
+                      PlayerState.disposed => AppImages.play,
+                    }),
                   ),
                 ],
               ),

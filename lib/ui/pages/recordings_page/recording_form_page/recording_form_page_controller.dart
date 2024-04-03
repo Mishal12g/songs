@@ -10,4 +10,8 @@ class RecordingFormPageController extends GetxController {
   ];
 
   Song? song;
+
+  clearTextField() {
+    nameController.clear();
+  }
 }
