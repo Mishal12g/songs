@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
 import 'package:songs/ui/pages/recordings_page/recording_page/recording_page_controller.dart';
+import 'package:songs/ui/pages/recordings_page/records_page.dart';
 
 class RecordingPage extends StatelessWidget {
   const RecordingPage({super.key});
@@ -24,9 +25,7 @@ class RecordingPage extends StatelessWidget {
             const _BackgroundWidget(),
             const Spacer(),
             SafeArea(
-              child: !c.isRecording
-                  ? _StopStateWidget(c: c)
-                  : _PlayStateWidget(c: c),
+              child: !true ? _StopStateWidget(c: c) : _PlayStateWidget(c: c),
             ),
             const SizedBox(height: 25),
           ],
@@ -53,7 +52,7 @@ class _PlayStateWidget extends StatelessWidget {
           fit: BoxFit.contain,
         ),
         Text(
-          "00:06",
+          formatTime(const Duration(seconds: 10)),
           style: GoogleFonts.manrope(
               fontWeight: FontWeight.w700,
               fontSize: 14,
@@ -62,7 +61,6 @@ class _PlayStateWidget extends StatelessWidget {
         IconButton(
           color: AppColors.yellow,
           onPressed: () {
-            c.stopRecording();
             Get.toNamed("/RecordingFormPage");
           },
           icon: Container(
@@ -100,9 +98,7 @@ class _StopStateWidget extends StatelessWidget {
         ),
         IconButton(
           color: AppColors.yellow,
-          onPressed: () {
-            c.startRecording();
-          },
+          onPressed: () {},
           icon: Container(
               width: 64,
               height: 43,

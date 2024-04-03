@@ -4,7 +4,7 @@ import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
 import 'package:songs/ui/pages/guitar_accessories_page/guitar_accessories_page.dart';
 import 'package:songs/ui/pages/guitars_page/guitars_page.dart';
-import 'package:songs/ui/pages/recordings_page/recordings_page.dart';
+import 'package:songs/ui/pages/recordings_page/records_page.dart';
 import 'package:songs/ui/pages/settings_page/settings_page.dart';
 import 'package:songs/ui/pages/songs_page/songs_page.dart';
 import 'package:songs/ui/pages/useful/useful_page.dart';

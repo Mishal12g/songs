@@ -11,7 +11,8 @@ import 'package:songs/ui/companents/form_textfield_widget.dart';
 import 'package:songs/ui/companents/two_buttons_widget.dart';
 import 'package:songs/ui/pages/recordings_page/recording_form_page/recording_form_page_controller.dart';
 import 'package:songs/ui/pages/recordings_page/recording_page/recording_page_controller.dart';
-import 'package:songs/ui/pages/recordings_page/recordings_page_controller.dart';
+import 'package:songs/ui/pages/recordings_page/records_page.dart';
+import 'package:songs/ui/pages/recordings_page/records_page_controller.dart';
 
 class RecordingFormPage extends StatelessWidget {
   const RecordingFormPage({super.key});
@@ -38,7 +39,7 @@ class RecordingFormPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Text("03:26"),
+                      Text(formatTime(const Duration(seconds: 10))),
                       const Spacer(),
                       Image.asset(
                         AppImages.soundRecordingTwo,
@@ -46,27 +47,8 @@ class RecordingFormPage extends StatelessWidget {
                       const Spacer(),
                       GetBuilder<RecordingFormPageController>(
                         builder: (controller) => IconButton(
-                          onPressed: () {
-                            switch (recordingC.isPlay()) {
-                              case PlayerState.stopped:
-                                recordingC.playRecording();
-                              case PlayerState.playing:
-                                recordingC.pauseAudio();
-                              case PlayerState.paused:
-                                recordingC.resumeAudio();
-                              case PlayerState.completed:
-                                recordingC.playRecording();
-                              case PlayerState.disposed:
-                                recordingC.playRecording();
-                            }
-                          },
-                          icon: Image.asset(switch (recordingC.isPlay()) {
-                            PlayerState.stopped => AppImages.play,
-                            PlayerState.playing => AppImages.stopTwo,
-                            PlayerState.paused => AppImages.play,
-                            PlayerState.completed => AppImages.play,
-                            PlayerState.disposed => AppImages.play,
-                          }),
+                          onPressed: () {},
+                          icon: Image.asset(AppImages.stopTwo),
                         ),
                       ),
                     ],
@@ -95,11 +77,14 @@ class RecordingFormPage extends StatelessWidget {
                     },
                     onTapTwo: () async {
                       final recordingC = Get.find<RecordingPageController>();
-                      if (c.nameController.text.isNotEmpty &&
-                          recordingC.audioPath.isNotEmpty) {
+                      if (c.nameController.text.isNotEmpty) {
                         final audio = Audio(
+                            duration: Duration.zero,
+                            position: Duration.zero,
+                            isPlay: false,
+                            seconds: 10,
                             name: c.nameController.text,
-                            audioPath: path.basename(recordingC.audioPath),
+                            audioPath: path.basename(""),
                             song: c.song);
 
                         Get.find<RecordsPageController>().addAudio(audio);
@@ -126,8 +111,6 @@ class RecordingFormPage extends StatelessWidget {
                     IconButton(
                       color: AppColors.yellow,
                       onPressed: () {
-                        Get.find<RecordingPageController>().startRecording();
-                        Get.find<RecordingPageController>().stopAudio();
                         Get.back();
                       },
                       icon: Container(

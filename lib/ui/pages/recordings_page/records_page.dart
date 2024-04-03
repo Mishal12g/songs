@@ -6,7 +6,7 @@ import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
 import 'package:songs/ui/companents/button_widget.dart';
 import 'package:songs/ui/companents/pop_up_delete_or_edit_widget.dart';
-import 'package:songs/ui/pages/recordings_page/recordings_page_controller.dart';
+import 'package:songs/ui/pages/recordings_page/records_page_controller.dart';
 
 class RecordingsPage extends StatelessWidget {
   const RecordingsPage({super.key});
@@ -29,22 +29,37 @@ class RecordingsPage extends StatelessWidget {
                       itemCount: c.audioList.length,
                       itemBuilder: (context, index) {
                         final record = c.audioList[index];
-                        return _AudioTileWidget(
-                          name: record.name,
-                          onTap: () async {
-                            switch (c.isPlay()) {
-                              case PlayerState.stopped:
-                                c.playRecording(index);
-                              case PlayerState.playing:
-                                c.pauseAudio();
-                              case PlayerState.paused:
-                                c.resumeAudio();
-                              case PlayerState.completed:
-                                c.playRecording(index);
-                              case PlayerState.disposed:
-                                c.playRecording(index);
-                            }
-                          },
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 6),
+                          child: _AudioTileWidget(
+                            index: index,
+                            name: record.name,
+                            onTap: () {
+                              if (c.player.state == PlayerState.playing) {
+                                if (index != c.playIndex && c.isPlay) {
+                                  c.setIsPlay(c.playIndex, false);
+                                  c.stopAudio();
+                                } else {
+                                  c.setIsPlay(index, false);
+                                  c.pauseAudio();
+                                }
+                              } else if (c.player.state == PlayerState.paused) {
+                                if (index != c.playIndex && c.isPlay) {
+                                  c.setIsPlay(c.playIndex, false);
+                                  c.stopAudio();
+                                } else {
+                                  c.setIsPlay(index, true);
+                                  c.resumeAudio();
+                                }
+                              } else if (c.player.state ==
+                                      PlayerState.completed ||
+                                  c.player.state == PlayerState.stopped) {
+                                c.playIndex = index;
+                                c.setIsPlay(index, true);
+                                c.playAudio(index);
+                              }
+                            },
+                          ),
                         );
                       },
                     ),
@@ -75,8 +90,14 @@ class RecordingsPage extends StatelessWidget {
 
 class _AudioTileWidget extends StatefulWidget {
   final String name;
+  final int index;
   final Function onTap;
-  const _AudioTileWidget({required this.name, required this.onTap});
+
+  const _AudioTileWidget({
+    required this.name,
+    required this.onTap,
+    required this.index,
+  });
 
   @override
   State<_AudioTileWidget> createState() => _AudioTileWidgetState();
@@ -113,21 +134,37 @@ class _AudioTileWidgetState extends State<_AudioTileWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text("03:26"),
-                  const Spacer(),
-                  Image.asset(
-                    AppImages.soundRecordingTwo,
+                  SizedBox(
+                    width: 40,
+                    child: Text(
+                      formatTime(
+                        c.audioList[widget.index].duration -
+                            c.audioList[widget.index].position,
+                      ),
+                    ),
                   ),
-                  const Spacer(),
+                  Expanded(
+                    child: Slider(
+                      min: 0,
+                      max: c.audioList[widget.index].duration.inSeconds
+                          .toDouble(),
+                      value: c.audioList[widget.index].position.inSeconds
+                          .toDouble(),
+                      onChanged: c.audioList[widget.index].isPlay
+                          ? (value) {
+                              final position = Duration(seconds: value.toInt());
+                              c.seekAudio(position);
+                            }
+                          : (value) {},
+                    ),
+                  ),
                   IconButton(
                     onPressed: () => widget.onTap(),
-                    icon: Image.asset(switch (c.isPlay()) {
-                      PlayerState.stopped => AppImages.play,
-                      PlayerState.playing => AppImages.stopTwo,
-                      PlayerState.paused => AppImages.play,
-                      PlayerState.completed => AppImages.play,
-                      PlayerState.disposed => AppImages.play,
-                    }),
+                    icon: Image.asset(
+                      c.audioList[widget.index].isPlay
+                          ? AppImages.stopTwo
+                          : AppImages.play,
+                    ),
                   ),
                 ],
               ),
@@ -180,4 +217,17 @@ class _EmptyStateWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+String formatTime(Duration duration) {
+  String twoDigits(int n) => n.toString().padLeft(2, "0");
+  final hours = twoDigits(duration.inHours);
+  final minutes = twoDigits(duration.inMinutes.remainder(60));
+  final seconds = twoDigits(duration.inSeconds.remainder(60));
+
+  return [
+    if (duration.inHours > 0) hours,
+    minutes,
+    seconds,
+  ].join(":");
 }
