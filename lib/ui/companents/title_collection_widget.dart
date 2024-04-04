@@ -50,6 +50,8 @@ class _TileCollectionWidgetState extends State<TileCollectionWidget> {
             children: [
               Text(
                 widget.typeGuitar,
+                maxLines: isOpen ? null : 1,
+                overflow: isOpen ? null : TextOverflow.ellipsis,
                 style: GoogleFonts.manrope(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -59,6 +61,8 @@ class _TileCollectionWidgetState extends State<TileCollectionWidget> {
               const SizedBox(height: 4),
               Text(
                 "${widget.markGuitar} ${widget.modelGuitar}",
+                maxLines: isOpen ? null : 1,
+                overflow: isOpen ? null : TextOverflow.ellipsis,
                 style: GoogleFonts.manrope(
                   fontSize: 17,
                   fontWeight: FontWeight.w700,
@@ -68,6 +72,7 @@ class _TileCollectionWidgetState extends State<TileCollectionWidget> {
               const SizedBox(height: 4),
               Text(
                 widget.comment,
+                maxLines: isOpen ? null : 1,
                 overflow: isOpen ? null : TextOverflow.ellipsis,
                 style: GoogleFonts.manrope(
                   fontSize: 14,

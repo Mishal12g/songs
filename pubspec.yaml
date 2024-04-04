@@ -44,6 +44,8 @@ dependencies:
   in_app_review: ^2.0.9
   record: ^4.4.4
   audioplayers: ^6.0.0
+  uuid: ^4.3.3
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
