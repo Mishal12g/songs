@@ -70,6 +70,7 @@ class RecordingsPage extends StatelessWidget {
               left: 17,
               child: Center(
                 child: ButtonWidget(
+                  height: 48,
                   width: double.infinity,
                   color: AppColors.yellow,
                   radius: 24,
