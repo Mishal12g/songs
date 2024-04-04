@@ -42,6 +42,11 @@ class RecordsPageController extends GetxController {
     update();
   }
 
+  editAudio(Audio audio, String id) {
+    _store.edit(audio, id);
+    update();
+  }
+
   playAudio(int index) async {
     playIndex = index;
     final dir = await getApplicationDocumentsDirectory();

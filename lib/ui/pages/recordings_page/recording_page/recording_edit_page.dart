@@ -7,14 +7,14 @@ import 'package:songs/ui/pages/recordings_page/recording_form_page/recording_for
 import 'package:songs/ui/pages/recordings_page/recording_page/recording_page_controller.dart';
 import 'package:songs/ui/pages/recordings_page/records_page.dart';
 
-class RecordingPage extends StatefulWidget {
-  const RecordingPage({super.key});
+class RecordingEditPage extends StatefulWidget {
+  const RecordingEditPage({super.key});
 
   @override
-  State<RecordingPage> createState() => _RecordingPageState();
+  State<RecordingEditPage> createState() => _RecordingEditPageState();
 }
 
-class _RecordingPageState extends State<RecordingPage> {
+class _RecordingEditPageState extends State<RecordingEditPage> {
   final RecordingPageController c = Get.find<RecordingPageController>();
 
   @override
@@ -77,10 +77,12 @@ class _PlayStateWidget extends StatelessWidget {
           IconButton(
             color: AppColors.yellow,
             onPressed: () {
-              c.stopRecord().then((value) {
-                formC.loadData();
-                Get.toNamed("/RecordingFormPage");
-              });
+              c.stopRecord().then(
+                (value) {
+                  formC.loadData();
+                  Get.back();
+                },
+              );
             },
             icon: Container(
                 width: 64,

@@ -13,7 +13,9 @@ import 'package:songs/ui/pages/guitar_accessories_page/guitar_accessories_form_p
 import 'package:songs/ui/pages/guitars_page/guitar_form_page/guitar_edit_form_page.dart';
 import 'package:songs/ui/pages/guitars_page/guitar_form_page/guitar_form_page.dart';
 import 'package:songs/ui/pages/onboarding_page/onboarding_page.dart';
+import 'package:songs/ui/pages/recordings_page/recording_form_page/recording_edit_form_page.dart';
 import 'package:songs/ui/pages/recordings_page/recording_form_page/recording_form_page.dart';
+import 'package:songs/ui/pages/recordings_page/recording_page/recording_edit_page.dart';
 import 'package:songs/ui/pages/recordings_page/recording_page/recording_page.dart';
 import 'package:songs/ui/pages/recordings_page/recording_page/recording_page_controller.dart';
 import 'package:songs/ui/pages/settings_page/settings_page.dart';
@@ -96,6 +98,8 @@ class MyApp extends StatelessWidget {
         "/RecordingPage": (context) => const RecordingPage(),
         "/RecordingFormPage": (context) => const RecordingFormPage(),
         "/SongEditFormPage": (context) => const SongEditFormPage(),
+        "/RecordingEditFormPage": (context) => const RecordingEditFormPage(),
+        "/RecordingEditPage": (context) => const RecordingEditPage(),
       },
     );
   }

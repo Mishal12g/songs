@@ -2,10 +2,12 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:songs/models/audio.dart';
 import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
 import 'package:songs/ui/companents/button_widget.dart';
 import 'package:songs/ui/companents/pop_up_delete_or_edit_widget.dart';
+import 'package:songs/ui/pages/recordings_page/recording_form_page/recording_form_page_controller.dart';
 import 'package:songs/ui/pages/recordings_page/records_page_controller.dart';
 
 class RecordingsPage extends StatelessWidget {
@@ -13,6 +15,7 @@ class RecordingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(RecordingFormPageController());
     final RecordsPageController c = Get.put(RecordsPageController());
     return Scaffold(
       appBar: AppBar(
@@ -32,6 +35,7 @@ class RecordingsPage extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 6),
                           child: _AudioTileWidget(
+                            audio: record,
                             index: index,
                             name: record.name,
                             onTap: () {
@@ -90,6 +94,7 @@ class RecordingsPage extends StatelessWidget {
 }
 
 class _AudioTileWidget extends StatefulWidget {
+  final Audio audio;
   final String name;
   final int index;
   final Function onTap;
@@ -98,6 +103,7 @@ class _AudioTileWidget extends StatefulWidget {
     required this.name,
     required this.onTap,
     required this.index,
+    required this.audio,
   });
 
   @override
@@ -140,7 +146,10 @@ class _AudioTileWidgetState extends State<_AudioTileWidget> {
           right: -10,
           top: -5,
           child: PopUpDeleteOrEditWidget(
-            edit: () {},
+            edit: () => Get.toNamed(
+              "/RecordingEditFormPage",
+              arguments: widget.audio,
+            ),
             delete: () {},
           ),
         )
