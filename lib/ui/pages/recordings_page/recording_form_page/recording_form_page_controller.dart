@@ -4,29 +4,34 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/instance_manager.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:songs/models/song.dart';
+import 'package:songs/services/store/song_store_service.dart';
 import 'package:songs/ui/pages/recordings_page/recording_page/recording_page_controller.dart';
 
 class RecordingFormPageController extends GetxController {
-  List<Song> songs = [
-    Song(name: "name", text: "text", comment: "comment", executor: "executor")
-  ];
-
+//Public properties
   final TextEditingController nameController = TextEditingController();
-
-  late AudioPlayer _player;
-  AudioPlayer get player => _player;
-  late String nameAudioFromPath;
-  late Duration savedDuration;
 
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
-  bool _isPlay = false;
-  bool get isPlay => _isPlay;
-
   Song? song;
+
+  late String nameAudioFromPath;
+  late Duration savedDuration;
+
+//Privates properties
+  late List<Song> _songs;
+  late AudioPlayer _player;
+  bool _isPlay = false;
+
+//Getters
+  List<Song> get songs => _songs;
+  AudioPlayer get player => _player;
+  bool get isPlay => _isPlay;
 
   RecordingFormPageController() {
     _player = AudioPlayer();
+    final SongStoreService service = SongStoreService();
+    _songs = service.songs;
 
     _player.onDurationChanged.listen((event) {
       duration = event;

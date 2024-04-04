@@ -11,6 +11,7 @@ import 'package:songs/resources/resources.dart';
 import 'package:songs/ui/companents/form_textfield_widget.dart';
 import 'package:songs/ui/companents/two_buttons_widget.dart';
 import 'package:songs/ui/pages/recordings_page/recording_form_page/recording_form_page_controller.dart';
+import 'package:songs/ui/pages/recordings_page/recording_page/recording_page_controller.dart';
 import 'package:songs/ui/pages/recordings_page/records_page.dart';
 import 'package:songs/ui/pages/recordings_page/records_page_controller.dart';
 
@@ -102,6 +103,7 @@ class RecordingFormPage extends StatelessWidget {
                     IconButton(
                       color: AppColors.yellow,
                       onPressed: () {
+                        Get.find<RecordingPageController>().startRecord();
                         Get.back();
                       },
                       icon: Container(
