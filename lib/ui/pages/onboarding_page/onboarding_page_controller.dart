@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:songs/resources/resources.dart';
+import 'package:songs/services/store/onboarding_store_service.dart';
 
 class OnboardingPageController extends GetxController {
   int _currentIndex = 0;
@@ -28,6 +29,7 @@ class OnboardingPageController extends GetxController {
       update();
     } else {
       Get.offAndToNamed("/tabbarPage");
+      OnboardingStoreService.hide();
     }
   }
 }

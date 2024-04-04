@@ -4,6 +4,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:songs/resources/app_colors.dart';
+import 'package:songs/services/store/onboarding_store_service.dart';
 import 'package:songs/ui/companents/button_widget.dart';
 import 'package:songs/ui/pages/onboarding_page/onboarding_page_controller.dart';
 
@@ -58,6 +59,7 @@ class OnboardingPage extends StatelessWidget {
                         text: "Пропустить",
                         onTap: () {
                           Get.offAndToNamed("/tabbarPage");
+                          OnboardingStoreService.hide();
                         },
                       ),
                       const Spacer(),
