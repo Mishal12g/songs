@@ -21,17 +21,23 @@ class GuitarStoreService {
 
   add(Guitar guitars) {
     _guitars.add(guitars);
-    _putAccessories();
+    _putGuitars();
+  }
+
+  delete(String id) {
+    final index = _guitars.indexWhere((element) => element.id == id);
+    _guitars.removeAt(index);
+    _putGuitars();
   }
 
   edit(Guitar guitars, String id) {
     final index = _guitars.indexWhere((element) => element.id == id);
     _guitars[index] = guitars;
-    _putAccessories();
+    _putGuitars();
   }
 
 //Privates methods
-  _putAccessories() {
+  _putGuitars() {
     _box.put("guitars", _guitars);
   }
 }

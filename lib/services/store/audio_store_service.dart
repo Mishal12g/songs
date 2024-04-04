@@ -21,17 +21,23 @@ class AudioStoreService {
 
   add(Audio audio) {
     _audioList.add(audio);
-    _putAccessories();
+    _putAudio();
   }
 
   edit(Audio audio, String id) {
     final index = _audioList.indexWhere((element) => element.id == id);
     _audioList[index] = audio;
-    _putAccessories();
+    _putAudio();
+  }
+
+  delete(String id) {
+    final index = _audioList.indexWhere((element) => element.id == id);
+    _audioList.removeAt(index);
+    _putAudio();
   }
 
 //Privates methods
-  _putAccessories() {
+  _putAudio() {
     _box.put("audioList", _audioList);
   }
 }

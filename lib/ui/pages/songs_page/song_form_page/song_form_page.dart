@@ -10,13 +10,24 @@ import 'package:songs/ui/companents/two_buttons_widget.dart';
 import 'package:songs/ui/pages/songs_page/song_form_page/song_form_page_controller.dart';
 import 'package:songs/ui/pages/songs_page/songs_page_controller.dart';
 
-class SongFormPage extends StatelessWidget {
+class SongFormPage extends StatefulWidget {
   const SongFormPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final SongFormPageController c = Get.put(SongFormPageController());
+  State<SongFormPage> createState() => _SongFormPageState();
+}
 
+class _SongFormPageState extends State<SongFormPage> {
+  final SongFormPageController c = Get.put(SongFormPageController());
+
+  @override
+  void dispose() {
+    c.clearControllers();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Row(

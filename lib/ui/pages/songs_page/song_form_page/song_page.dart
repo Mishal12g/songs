@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:songs/models/song.dart';
 import 'package:songs/resources/resources.dart';
+import 'package:songs/ui/companents/show_alert.dart';
+import 'package:songs/ui/pages/songs_page/songs_page_controller.dart';
 
 class SongPage extends StatelessWidget {
   const SongPage({super.key});
@@ -22,7 +24,20 @@ class SongPage extends StatelessWidget {
                   Get.toNamed("/SongEditFormPage", arguments: song);
                 },
                 icon: Image.asset(AppImages.editTwo)),
-            IconButton(onPressed: () {}, icon: Image.asset(AppImages.trashTwo)),
+            IconButton(
+                onPressed: () async {
+                  await showAlert(
+                    context,
+                    () {
+                      Get.find<SongsPageController>().deleteSong(song.id);
+                      Get.back();
+                      Get.back();
+                    },
+                    title: 'Удалить?',
+                    content: 'Вы точно хотите удалить гитару?',
+                  );
+                },
+                icon: Image.asset(AppImages.trashTwo)),
           ],
         ),
       ),

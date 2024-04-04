@@ -7,6 +7,7 @@ import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
 import 'package:songs/ui/companents/button_widget.dart';
 import 'package:songs/ui/companents/pop_up_delete_or_edit_widget.dart';
+import 'package:songs/ui/companents/show_alert.dart';
 import 'package:songs/ui/pages/recordings_page/recording_form_page/recording_form_page_controller.dart';
 import 'package:songs/ui/pages/recordings_page/records_page_controller.dart';
 
@@ -150,7 +151,17 @@ class _AudioTileWidgetState extends State<_AudioTileWidget> {
               "/RecordingEditFormPage",
               arguments: widget.audio,
             ),
-            delete: () {},
+            delete: () async {
+              await showAlert(
+                context,
+                () {
+                  c.deleteAudio(widget.audio.id);
+                  Get.back();
+                },
+                title: 'Удалить?',
+                content: 'Вы точно хотите удалить гитару?',
+              );
+            },
           ),
         )
       ],

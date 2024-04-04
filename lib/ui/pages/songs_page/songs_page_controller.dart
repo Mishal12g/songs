@@ -12,6 +12,11 @@ class SongsPageController extends GetxController {
     update();
   }
 
+  deleteSong(String id) {
+    _service.delete(id);
+    update();
+  }
+
   editSong(Song song, String id) {
     _service.edit(song, id);
     update();

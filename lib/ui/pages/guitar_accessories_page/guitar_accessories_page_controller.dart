@@ -11,6 +11,11 @@ class GuitarsAccessoriesPageController extends GetxController {
     update();
   }
 
+  deleteAccessories(String id) {
+    _store.delete(id);
+    update();
+  }
+
   editAccessory(Accessory accessory, String id) {
     _store.edit(accessory, id);
     update();

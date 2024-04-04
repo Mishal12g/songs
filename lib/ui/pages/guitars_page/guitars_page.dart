@@ -44,6 +44,7 @@ class GuitarsPage extends StatelessWidget {
                                 await showAlert(
                                   context,
                                   () {
+                                    c.deleteGuitar(guitar.id);
                                     Get.back();
                                   },
                                   title: 'Удалить?',

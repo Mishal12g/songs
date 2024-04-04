@@ -25,6 +25,12 @@ class AccessoryStoreService {
     _putAccessories();
   }
 
+  delete(String id) {
+    final index = _accessories.indexWhere((element) => element.id == id);
+    _accessories.removeAt(index);
+    _putAccessories();
+  }
+
   edit(Accessory accessory, String id) {
     final index = _accessories.indexWhere((element) => element.id == id);
     _accessories[index] = accessory;

@@ -5,10 +5,11 @@ import 'package:songs/models/audio.dart';
 import 'package:songs/services/store/audio_store_service.dart';
 
 class RecordsPageController extends GetxController {
+  final AudioStoreService _store = AudioStoreService();
   late AudioPlayer _player;
+
   late int playIndex;
 
-  final AudioStoreService _store = AudioStoreService();
   bool _isPlay = false;
 
   List<Audio> get audioList => _store.audioList;
@@ -39,6 +40,11 @@ class RecordsPageController extends GetxController {
 
   addAudio(Audio audio) {
     _store.add(audio);
+    update();
+  }
+
+  deleteAudio(String id) {
+    _store.delete(id);
     update();
   }
 

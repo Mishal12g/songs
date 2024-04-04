@@ -21,17 +21,23 @@ class SongStoreService {
 
   add(Song song) {
     _songs.add(song);
-    _putAccessories();
+    _putSongs();
+  }
+
+  delete(String id) {
+    final index = _songs.indexWhere((element) => element.id == id);
+    _songs.removeAt(index);
+    _putSongs();
   }
 
   edit(Song song, String id) {
     final index = _songs.indexWhere((element) => element.id == id);
     _songs[index] = song;
-    _putAccessories();
+    _putSongs();
   }
 
 //Privates methods
-  _putAccessories() {
+  _putSongs() {
     _box.put("songs", _songs);
   }
 }

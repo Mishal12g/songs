@@ -5,6 +5,7 @@ import 'package:songs/resources/app_colors.dart';
 import 'package:songs/resources/resources.dart';
 import 'package:songs/ui/companents/button_widget.dart';
 import 'package:songs/ui/companents/pop_up_delete_or_edit_widget.dart';
+import 'package:songs/ui/companents/show_alert.dart';
 import 'package:songs/ui/pages/songs_page/songs_page_controller.dart';
 
 class SongsPage extends StatelessWidget {
@@ -34,7 +35,17 @@ class SongsPage extends StatelessWidget {
                             _SongTileWidget(
                               name: song.name,
                               group: song.executor,
-                              delete: () {},
+                              delete: () async {
+                                await showAlert(
+                                  context,
+                                  () {
+                                    c.deleteSong(song.id);
+                                    Get.back();
+                                  },
+                                  title: 'Удалить?',
+                                  content: 'Вы точно хотите удалить гитару?',
+                                );
+                              },
                               edit: () => Get.toNamed("/SongEditFormPage",
                                   arguments: song),
                               onTap: () {
