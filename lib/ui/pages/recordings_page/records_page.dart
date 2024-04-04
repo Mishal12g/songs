@@ -131,43 +131,7 @@ class _AudioTileWidgetState extends State<_AudioTileWidget> {
                 ),
               ),
               const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    width: 40,
-                    child: Text(
-                      formatTime(
-                        c.audioList[widget.index].duration -
-                            c.audioList[widget.index].position,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Slider(
-                      min: 0,
-                      max: c.audioList[widget.index].duration.inSeconds
-                          .toDouble(),
-                      value: c.audioList[widget.index].position.inSeconds
-                          .toDouble(),
-                      onChanged: c.audioList[widget.index].isPlay
-                          ? (value) {
-                              final position = Duration(seconds: value.toInt());
-                              c.seekAudio(position);
-                            }
-                          : (value) {},
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () => widget.onTap(),
-                    icon: Image.asset(
-                      c.audioList[widget.index].isPlay
-                          ? AppImages.stopTwo
-                          : AppImages.play,
-                    ),
-                  ),
-                ],
-              ),
+              _RowAudioWidget(c: c, widget: widget),
             ],
           ),
         ),
@@ -179,6 +143,59 @@ class _AudioTileWidgetState extends State<_AudioTileWidget> {
             delete: () {},
           ),
         )
+      ],
+    );
+  }
+}
+
+class _RowAudioWidget extends StatelessWidget {
+  const _RowAudioWidget({
+    required this.c,
+    required this.widget,
+  });
+
+  final RecordsPageController c;
+  final _AudioTileWidget widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        SizedBox(
+          width: 40,
+          child: Text(
+            formatTime(
+              Duration(seconds: c.audioList[widget.index].duration) -
+                  Duration(seconds: c.audioList[widget.index].position),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Slider(
+            min: 0,
+            max: Duration(seconds: c.audioList[widget.index].duration)
+                .inSeconds
+                .toDouble(),
+            value: Duration(seconds: c.audioList[widget.index].position)
+                .inSeconds
+                .toDouble(),
+            onChanged: c.audioList[widget.index].isPlay
+                ? (value) {
+                    final position = Duration(seconds: value.toInt());
+                    c.seekAudio(position);
+                  }
+                : (value) {},
+          ),
+        ),
+        IconButton(
+          onPressed: () => widget.onTap(),
+          icon: Image.asset(
+            c.audioList[widget.index].isPlay
+                ? AppImages.stopTwo
+                : AppImages.play,
+          ),
+        ),
       ],
     );
   }

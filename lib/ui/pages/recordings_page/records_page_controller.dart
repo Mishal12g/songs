@@ -2,7 +2,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:songs/models/audio.dart';
-import 'package:path/path.dart' as path;
 
 class RecordsPageController extends GetxController {
   late AudioPlayer _player;
@@ -19,12 +18,12 @@ class RecordsPageController extends GetxController {
     _player = AudioPlayer();
 
     _player.onDurationChanged.listen((event) {
-      _audioList[playIndex].duration = event;
+      _audioList[playIndex].duration = event.inSeconds;
       update();
     });
 
     _player.onPositionChanged.listen((event) {
-      _audioList[playIndex].position = event;
+      _audioList[playIndex].position = event.inSeconds;
       update();
     });
 
@@ -47,8 +46,7 @@ class RecordsPageController extends GetxController {
     final dir = await getApplicationDocumentsDirectory();
     final tmpDir = dir.path.replaceAll("Documents", "tmp/");
     final path = "$tmpDir${audioList[index].audioPath}";
-    await _player.play(DeviceFileSource(
-        "/Users/mihail/Music/Music/Media.localized/Music/Михаил Озеров/Лава/Лава.mp3"));
+    await _player.play(DeviceFileSource(path));
     _isPlay = true;
     update();
   }

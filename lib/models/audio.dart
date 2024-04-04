@@ -4,9 +4,8 @@ class Audio {
   final String name;
   final String audioPath;
   final Song? song;
-  final int seconds;
-  Duration duration;
-  Duration position;
+  int duration;
+  int position;
   bool isPlay;
 
   Audio({
@@ -15,7 +14,6 @@ class Audio {
     required this.name,
     required this.audioPath,
     required this.song,
-    required this.seconds,
     required this.isPlay,
   });
 }

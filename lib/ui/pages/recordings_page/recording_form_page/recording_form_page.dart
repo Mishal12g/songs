@@ -1,5 +1,6 @@
-import 'package:path/path.dart' as path;
 import 'package:audioplayers/audioplayers.dart';
+// ignore: depend_on_referenced_packages
+import 'package:path/path.dart' as path;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +11,6 @@ import 'package:songs/resources/resources.dart';
 import 'package:songs/ui/companents/form_textfield_widget.dart';
 import 'package:songs/ui/companents/two_buttons_widget.dart';
 import 'package:songs/ui/pages/recordings_page/recording_form_page/recording_form_page_controller.dart';
-import 'package:songs/ui/pages/recordings_page/recording_page/recording_page_controller.dart';
 import 'package:songs/ui/pages/recordings_page/records_page.dart';
 import 'package:songs/ui/pages/recordings_page/records_page_controller.dart';
 
@@ -19,10 +19,7 @@ class RecordingFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RecordingFormPageController c =
-        Get.put(RecordingFormPageController());
-
-    final recordingC = Get.find<RecordingPageController>();
+    final c = Get.find<RecordingFormPageController>();
 
     return Scaffold(
       appBar: AppBar(
@@ -32,26 +29,22 @@ class RecordingFormPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Stack(
           children: [
-            GetBuilder<RecordingPageController>(
+            GetBuilder<RecordingFormPageController>(
               builder: (controller) => ListView(
                 children: [
                   const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(formatTime(const Duration(seconds: 10))),
-                      const Spacer(),
-                      Image.asset(
-                        AppImages.soundRecordingTwo,
-                      ),
-                      const Spacer(),
-                      GetBuilder<RecordingFormPageController>(
-                        builder: (controller) => IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(AppImages.stopTwo),
-                        ),
-                      ),
-                    ],
+                  _RowAudioWidget(
+                    c: c,
+                    onTap: () {
+                      if (c.player.state == PlayerState.playing) {
+                        c.pauseAudio();
+                      } else if (c.player.state == PlayerState.paused) {
+                        c.resumeAudio();
+                      } else if (c.player.state == PlayerState.completed ||
+                          c.player.state == PlayerState.stopped) {
+                        c.playAudio();
+                      }
+                    },
                   ),
                   const SizedBox(height: 24),
                   Text(
@@ -76,15 +69,13 @@ class RecordingFormPage extends StatelessWidget {
                       Get.back();
                     },
                     onTapTwo: () async {
-                      final recordingC = Get.find<RecordingPageController>();
                       if (c.nameController.text.isNotEmpty) {
                         final audio = Audio(
-                            duration: Duration.zero,
-                            position: Duration.zero,
+                            duration: c.savedDuration.inSeconds,
+                            position: 0,
                             isPlay: false,
-                            seconds: 10,
                             name: c.nameController.text,
-                            audioPath: path.basename(""),
+                            audioPath: path.basename(c.nameAudioFromPath),
                             song: c.song);
 
                         Get.find<RecordsPageController>().addAudio(audio);
@@ -137,13 +128,70 @@ class RecordingFormPage extends StatelessWidget {
   }
 }
 
-class _SelectSongWidget extends StatelessWidget {
+class _RowAudioWidget extends StatelessWidget {
+  final Function onTap;
+  final RecordingFormPageController c;
+
+  const _RowAudioWidget({
+    required this.c,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        SizedBox(
+          width: 40,
+          child: Text(
+            formatTime(
+              c.isPlay ? c.duration - c.position : c.savedDuration,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Slider(
+            min: 0,
+            max: c.duration.inSeconds.toDouble(),
+            value: c.position.inSeconds.toDouble(),
+            onChanged: c.isPlay
+                ? (value) {
+                    final position = Duration(seconds: value.toInt());
+                    c.seekAudio(position);
+                  }
+                : (value) {},
+          ),
+        ),
+        IconButton(
+          onPressed: () => onTap(),
+          icon: Image.asset(
+            c.isPlay ? AppImages.stopTwo : AppImages.play,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SelectSongWidget extends StatefulWidget {
   const _SelectSongWidget({
-    super.key,
     required this.c,
   });
 
   final RecordingFormPageController c;
+
+  @override
+  State<_SelectSongWidget> createState() => _SelectSongWidgetState();
+}
+
+class _SelectSongWidgetState extends State<_SelectSongWidget> {
+  @override
+  void dispose() {
+    widget.c.nameController.clear();
+    widget.c.stopAudio();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -157,9 +205,9 @@ class _SelectSongWidget extends StatelessWidget {
       ),
       color: const Color.fromRGBO(50, 49, 58, 1),
       onSelected: (Song item) {
-        c.song = item;
+        widget.c.song = item;
       },
-      itemBuilder: (BuildContext context) => c.songs.map(
+      itemBuilder: (BuildContext context) => widget.c.songs.map(
         (e) {
           return PopupMenuItem<Song>(
             value: e,
