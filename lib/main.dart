@@ -4,6 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:songs/models/accessories.dart';
+import 'package:songs/models/audio.dart';
+import 'package:songs/models/guitar.dart';
+import 'package:songs/models/song.dart';
 import 'package:songs/resources/app_colors.dart';
 import 'package:songs/ui/pages/guitar_accessories_page/guitar_accessories_form_page/guitar_accessories_edit_form_page.dart';
 import 'package:songs/ui/pages/guitar_accessories_page/guitar_accessories_form_page/guitar_accessories_form_page.dart';
@@ -26,8 +29,17 @@ import 'package:songs/ui/pages/useful/setting_guitar_page.dart';
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter((await getApplicationDocumentsDirectory()).path);
-  Hive.registerAdapter(AccessoryAdapter());
-  Hive.openBox<List>("Accessory");
+
+  Hive
+    ..registerAdapter(AccessoryAdapter())
+    ..registerAdapter(AudioAdapter())
+    ..registerAdapter(SongAdapter())
+    ..registerAdapter(GuitarAdapter());
+
+  await Hive.openBox<List>("Accessory");
+  await Hive.openBox<List>("Audio");
+  await Hive.openBox<List>("Song");
+  await Hive.openBox<List>("Guitar");
 
   runApp(const MyApp());
 }

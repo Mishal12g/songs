@@ -1,19 +1,23 @@
 import 'package:hive/hive.dart';
 import 'package:songs/models/accessories.dart';
 
-class AccessoryStore {
-  late Box<List> box;
+class AccessoryStoreService {
+  //Privates properties
+  late Box<List> _box;
   List<Accessory> _accessories = [];
+
+  //Getters
   List<Accessory> get accessories => _accessories;
 
-  AccessoryStore() {
+  AccessoryStoreService() {
     loadData();
   }
 
+//Public methods
   loadData() async {
-    box = Hive.box<List>("Accessory");
+    _box = Hive.box<List>("Accessory");
     _accessories =
-        box.get("accessories")?.map((e) => e as Accessory).toList() ?? [];
+        _box.get("accessories")?.map((e) => e as Accessory).toList() ?? [];
   }
 
   add(Accessory accessory) {
@@ -27,12 +31,8 @@ class AccessoryStore {
     _putAccessories();
   }
 
-  // get(Accessory accessory, String id) {
-  //   final index = _accessories.indexWhere((element) => element.id == id);
-  //   _accessories[index] = accessory;
-  // }
-
+//Privates methods
   _putAccessories() {
-    box.put("accessories", _accessories);
+    _box.put("accessories", _accessories);
   }
 }

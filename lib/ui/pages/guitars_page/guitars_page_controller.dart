@@ -1,12 +1,13 @@
 import 'package:get/get.dart';
 import 'package:songs/models/guitar.dart';
+import 'package:songs/services/store/guitar_store_service.dart';
 
 class GuitarsPageController extends GetxController {
-  List<Guitar> _guitars = [];
-  List<Guitar> get guitars => _guitars;
+  final GuitarStoreService _service = GuitarStoreService();
+  List<Guitar> get guitars => _service.guitars;
 
   addGuitar(Guitar guitar) {
-    _guitars.add(guitar);
+    _service.add(guitar);
     update();
   }
 
