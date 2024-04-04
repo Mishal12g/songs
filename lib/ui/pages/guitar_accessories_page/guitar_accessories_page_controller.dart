@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:songs/models/accessories.dart';
-import 'package:songs/services/store/accessory_store_service.dart';
+import 'package:songs/services/accessory_store_service.dart';
 
 class GuitarsAccessoriesPageController extends GetxController {
   final AccessoryStoreService _store = AccessoryStoreService();

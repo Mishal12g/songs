@@ -127,7 +127,7 @@ class _PopMenuWidget extends StatelessWidget {
             ),
             color: const Color.fromRGBO(50, 49, 58, 1),
             onSelected: (Guitar item) {
-              if (c.guitar != null) c.guitar = item;
+              c.guitar = item;
             },
             itemBuilder: (BuildContext context) => c.guitars.map(
               (e) {
@@ -158,7 +158,7 @@ class _PopMenuWidget extends StatelessWidget {
             ),
             color: const Color.fromRGBO(50, 49, 58, 1),
             onSelected: (Accessory item) {
-              if (c.accessory != null) c.accessory = item;
+              c.accessory = item;
             },
             itemBuilder: (BuildContext context) => c.accessories.map(
               (e) {
@@ -167,7 +167,7 @@ class _PopMenuWidget extends StatelessWidget {
                   child: SizedBox(
                     width: 110,
                     child: Text(
-                      e.comment,
+                      e.name,
                       style: GoogleFonts.manrope(
                         fontSize: 13,
                         fontWeight: FontWeight.w400,

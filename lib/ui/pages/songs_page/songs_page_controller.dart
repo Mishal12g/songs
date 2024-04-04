@@ -1,13 +1,14 @@
 import 'package:get/get.dart';
 import 'package:songs/models/song.dart';
+import 'package:songs/services/store/song_store_service.dart';
 
 class SongsPageController extends GetxController {
-  final List<Song> _songs = [];
+  final SongStoreService _service = SongStoreService();
 
-  List<Song> get songs => _songs;
+  List<Song> get songs => _service.songs;
 
   addSong(Song song) {
-    _songs.add(song);
+    _service.add(song);
     update();
   }
 }
