@@ -90,7 +90,8 @@ class GuitarEditFormPage extends StatelessWidget {
                     comment: c.commentController.text,
                   );
 
-                  Get.find<GuitarsPageController>().editGuitar(newGuitar);
+                  Get.find<GuitarsPageController>()
+                      .editGuitar(newGuitar, guitar.id);
                   c.clearTextFields();
                   Get.back();
                 }

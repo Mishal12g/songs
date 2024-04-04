@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:songs/models/song.dart';
 import 'package:songs/resources/resources.dart';
@@ -16,7 +17,11 @@ class SongPage extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            IconButton(onPressed: () {}, icon: Image.asset(AppImages.editTwo)),
+            IconButton(
+                onPressed: () {
+                  Get.toNamed("/SongEditFormPage", arguments: song);
+                },
+                icon: Image.asset(AppImages.editTwo)),
             IconButton(onPressed: () {}, icon: Image.asset(AppImages.trashTwo)),
           ],
         ),

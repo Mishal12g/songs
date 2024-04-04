@@ -35,7 +35,8 @@ class SongsPage extends StatelessWidget {
                               name: song.name,
                               group: song.executor,
                               delete: () {},
-                              edit: () {},
+                              edit: () => Get.toNamed("/SongEditFormPage",
+                                  arguments: song),
                               onTap: () {
                                 Get.toNamed("/SongPage", arguments: song);
                               },

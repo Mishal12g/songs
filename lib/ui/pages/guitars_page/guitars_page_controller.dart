@@ -11,8 +11,8 @@ class GuitarsPageController extends GetxController {
     update();
   }
 
-  editGuitar(Guitar guitar) {
-// _guitars[index]
+  editGuitar(Guitar guitar, String id) {
+    _service.edit(guitar, id);
 
     update();
   }

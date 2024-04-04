@@ -11,6 +11,11 @@ class SongsPageController extends GetxController {
     _service.add(song);
     update();
   }
+
+  editSong(Song song, String id) {
+    _service.edit(song, id);
+    update();
+  }
 }
 
 String text = """Для удобства: тональность «- 2»

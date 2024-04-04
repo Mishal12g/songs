@@ -84,7 +84,7 @@ class GuitarEditAccessoriesFormPage extends StatelessWidget {
                     comment: c.commentController.text,
                   );
                   Get.find<GuitarsAccessoriesPageController>()
-                      .editAccessory(accessories);
+                      .editAccessory(accessories, accessory.id);
                   c.clearTextFields();
                   Get.back();
                 }
