@@ -32,7 +32,9 @@ class GuitarEditAccessoriesFormPage extends StatelessWidget {
                 await showAlert(
                   context,
                   () {
-                    print("delete");
+                    Get.find<GuitarsAccessoriesPageController>()
+                        .deleteAccessories(accessory.id);
+                    Get.back();
                     Get.back();
                   },
                   title: 'Удалить?',
