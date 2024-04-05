@@ -34,7 +34,7 @@ class SongPage extends StatelessWidget {
                       Get.back();
                     },
                     title: 'Удалить?',
-                    content: 'Вы точно хотите удалить гитару?',
+                    content: 'Вы точно хотите удалить песню?',
                   );
                 },
                 icon: Image.asset(AppImages.trashTwo)),

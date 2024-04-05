@@ -25,7 +25,7 @@ Future<dynamic> showAlert(
         ),
       ),
       content: Text(
-        'Вы точно хотите удалить гитару?',
+        content,
         textAlign: TextAlign.center,
         style: GoogleFonts.manrope(
           fontSize: 11,

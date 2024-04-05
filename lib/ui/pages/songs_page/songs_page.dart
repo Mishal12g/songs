@@ -43,7 +43,7 @@ class SongsPage extends StatelessWidget {
                                     Get.back();
                                   },
                                   title: 'Удалить?',
-                                  content: 'Вы точно хотите удалить гитару?',
+                                  content: 'Вы точно хотите удалить песню?',
                                 );
                               },
                               edit: () => Get.toNamed("/SongEditFormPage",

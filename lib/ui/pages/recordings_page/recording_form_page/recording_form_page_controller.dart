@@ -69,7 +69,6 @@ class RecordingFormPageController extends GetxController {
     final tmpDir = dir.path.replaceAll("Documents", "tmp/");
     final path = "$tmpDir$nameAudioFromPath";
 
-    print(path);
     await _player.play(DeviceFileSource(path));
     _isPlay = true;
     update();

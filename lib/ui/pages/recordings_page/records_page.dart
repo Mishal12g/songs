@@ -36,6 +36,9 @@ class RecordingsPage extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 6),
                           child: _AudioTileWidget(
+                            songName: record.song != null
+                                ? "${record.song?.name},${record.song?.executor}"
+                                : null,
                             audio: record,
                             index: index,
                             name: record.name,
@@ -95,6 +98,7 @@ class RecordingsPage extends StatelessWidget {
 }
 
 class _AudioTileWidget extends StatefulWidget {
+  final String? songName;
   final Audio audio;
   final String name;
   final int index;
@@ -105,6 +109,7 @@ class _AudioTileWidget extends StatefulWidget {
     required this.onTap,
     required this.index,
     required this.audio,
+    this.songName,
   });
 
   @override
@@ -140,6 +145,16 @@ class _AudioTileWidgetState extends State<_AudioTileWidget> {
               ),
               const SizedBox(height: 12),
               _RowAudioWidget(c: c, widget: widget),
+              widget.songName != null
+                  ? Text(
+                      widget.songName ?? "",
+                      style: GoogleFonts.manrope(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13,
+                        color: AppColors.gray,
+                      ),
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),
@@ -159,7 +174,7 @@ class _AudioTileWidgetState extends State<_AudioTileWidget> {
                   Get.back();
                 },
                 title: 'Удалить?',
-                content: 'Вы точно хотите удалить гитару?',
+                content: 'Вы точно хотите удалить звукозапись?',
               );
             },
           ),

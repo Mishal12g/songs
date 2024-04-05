@@ -50,7 +50,7 @@ class GuitarAccessoriesPage extends StatelessWidget {
                                     Get.back();
                                   },
                                   title: 'Удалить?',
-                                  content: 'Вы точно хотите удалить гитару?',
+                                  content: 'Вы точно хотите удалить аксессуар?',
                                 );
                               },
                               editOnTap: () {

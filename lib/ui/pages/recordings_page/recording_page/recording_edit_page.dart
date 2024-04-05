@@ -56,8 +56,8 @@ class _PlayStateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formC = Get.find<RecordingFormPageController>();
-
     final RecordingPageController c = Get.find<RecordingPageController>();
+
     return GetBuilder<RecordingPageController>(
       builder: (controller) => Column(
         children: [
